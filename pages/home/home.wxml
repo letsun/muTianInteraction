@@ -1,0 +1,27 @@
+<!--pages/home/home.wxml-->
+
+<view id="container" class="container">
+    <image class="bg" src="../images/1_5.png"></image>
+    <view class="content">
+        <!-- <view class="login-out">退出登录</view> -->
+        <image class="header" src="../images/1_4.png" alt=""></image>
+
+        <view class="nav-list">
+            <view class="nav-item">
+                <image class="nav-icon" src="../images/1_2.png" alt=""></image>
+                <view class="nav-text">开始查询</view>
+            </view>
+
+            <view class="nav-item" bindtap="uploadbatch">
+                <image class="nav-icon" src="../images/1_1.png" alt=""></image>
+                <view class="nav-text">上传产检报告</view>
+            </view>
+
+            <view class="nav-item">
+
+                <image class="nav-icon" src="../images/1_3.png" alt=""></image>
+                <view class="nav-text">溯源监控中心</view>
+            </view>
+        </view>
+    </view>
+</view>

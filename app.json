@@ -1,0 +1,18 @@
+{
+    "pages": [
+        "pages/addbatch/addbatch",
+        "pages/home/home",
+        "pages/uploadbatch/uploadbatch",
+        "pages/index/index",
+ 
+        "pages/logs/logs"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}
