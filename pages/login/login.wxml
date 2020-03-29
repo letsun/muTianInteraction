@@ -1,0 +1,27 @@
+<!--pages/menwei/index/index.wxml-->
+<view class="container" style="">
+  <view class="content">
+    <!-- logo -->
+    <view class="logo">
+      <image src="https://qdwzvue-1254182596.cos.ap-guangzhou.myqcloud.com/qdwzAct/paide/1_2.png"></image>
+    </view>
+
+
+    <form bindsubmit="oaLogin">
+      <view class="input-item">
+
+        <label><image src="https://qdwzvue-1254182596.cos.ap-guangzhou.myqcloud.com/qdwzAct/paide/1_3.png"></image></label>
+        <input placeholder="请输入账号" placeholder-class="placeholderStyle" name="username"></input>
+      </view>
+
+      <view class="input-item">
+        <label><image src="https://qdwzvue-1254182596.cos.ap-guangzhou.myqcloud.com/qdwzAct/paide/1_4.png"></image></label>
+        <input placeholder="请输入密码" type="password" placeholder-class="placeholderStyle" name="password"></input>
+      </view>
+
+      <button class="form-btn" form-type="submit" >
+        立即登录
+      </button>
+    </form>
+  </view>
+</view>

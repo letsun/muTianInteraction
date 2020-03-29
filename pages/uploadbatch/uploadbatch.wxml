@@ -1,63 +1,46 @@
 <!--pages/uploadbatch/uploadbatch.wxml-->
 <view class="container">
 
-    <!--导航-->
-    <view class="nav">
-        <view class="nav-item" wx:for="{{nav}}" wx:key="xxx" bindtap="bindnav" data-index="{{index}}">
-            <a >
-                <view class="center-wra">
-                    <image class="nav-img" src="{{item.img}}" alt=""/>
-                    <view class="nav-text">{{item.text}}</view>
-                </view>
-            </a>
-            <view class="{{index==indexa?'line':''}}"></view>
-        </view>
+	<!--导航-->
+	<view class="nav">
+		<view class="nav-item" wx:for="{{nav}}" wx:key="xxx" bindtap="bindnav" data-index="{{index}}">
+			<a>
+				<view class="center-wra">
+					<image class="nav-img" src="{{item.img}}" alt="" />
+					<view class="nav-text">{{item.text}}</view>
+				</view>
+			</a>
+			<view class="{{index==indexa?'line':''}}"></view>
+		</view>
 
-    </view>
+	</view>
 
-        <view class="content">
-            <view class="wrapper ">
-                <view class="title">
-                    <view class="title-item"></view>
-                    <view class="title-item">生产批号</view>
-                    <view class="title-item">产品名称</view>
-                    <view class="title-item">生产数量</view>
-                    <view class="title-item">生产日期</view>
-                </view>
-                <view class="list">
-                    <view class="item">
-                        <view class="item-con">
-                            <view class="check-wra">
-                                <view class="point-wra">
-                                    <!-- <view class="point"></view> -->
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item-con">20181203-1-0003</view>
-                        <view class="item-con">白砂糖50KG</view>
-                        <view class="item-con">423</view>
-                        <view class="item-con">2018-12-03</view>
-                    </view>
+	<view class="content">
+		<view class="wrapper ">
+			<view class="title">
+				<view class="title-item"></view>
+				<view class="title-item">生产批号</view>
+				<view class="title-item">产品名称</view>
+				<view class="title-item">生产数量</view>
+				<view class="title-item">生产日期</view>
+			</view>
+			<view class="list">
+				<view class="item" wx:for="{{batchList}}" wx:key="xxx">
+					<view class="item-con">
+						<view class="check-wra">
+							<view class="point-wra" bindtap="ischecked" data-index="{{index}}">
+								<view class="point" wx:if="{{item.checked}}"></view>
+							</view>
+						</view>
+					</view>
+					<view class="item-con">{{item.batchNo}}</view>
+					<view class="item-con">{{item.productName}}</view>
+					<view class="item-con">{{item.quantity}}</view>
+					<view class="item-con">{{item.produceTime}}</view>
+				</view>
 
-                    <view class="item">
-                        <view class="item-con">
-                            <view class="check-wra">
-                                <view class="point-wra">
-                                    <view class="point"></view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="item-con">20181203-1-0003</view>
-                        <view class="item-con">白砂糖50KG</view>
-                        <view class="item-con">423</view>
-                        <view class="item-con">2018-12-03</view>
-                    </view>
-                </view>
-            </view>
-
-        </view>
-
-
-    <view class="upload-btn" bindtap="addbatch">上传产检报告</view>
-
+			</view>
+		</view>
+	</view>
+	<view class="upload-btn" bindtap="addbatch" wx:if="{{indexa==0}}">上传产检报告</view>
 </view>

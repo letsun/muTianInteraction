@@ -4,20 +4,28 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
 		"coverView": true,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
-	"appid": "wx239aaf7a14cb0172",
+	"appid": "wx92ddcbce04fc34b6",
 	"projectname": "muTianInteraction",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -57,8 +65,8 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "上传质检报告",
+					"id": 1,
+					"name": "批次列表",
 					"pathName": "pages/uploadbatch/uploadbatch",
 					"query": "",
 					"scene": null
@@ -67,6 +75,7 @@
 					"id": -1,
 					"name": "上传质检报告",
 					"pathName": "pages/addbatch/addbatch",
+					"query": "",
 					"scene": null
 				}
 			]

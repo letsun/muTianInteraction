@@ -289,10 +289,50 @@ function requestGets(url, data, success) {
 function getopenid(callback) {
   wx.login({
     success: res => {
-      requestPost(api.getCheckOpenidByCode,{
+      requestPost(api.getProduceCheckOpenid,{
         code: res.code
       },res=>{
         callback(res)
+      })
+    }
+  })
+}
+
+
+function chooseImage(success) {
+  wx.chooseImage({
+    count: 1,
+    sizeType: ['compressed'], //'original', 'compressed' 可以指定是原图还是压缩图，默认二者都有
+    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+    success: function(res) {
+      // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+
+      const tempFilePaths = res.tempFilePaths;
+
+      console.log(res)
+      wx.uploadFile({
+        url: api.upload, //仅为示例，非真实的接口地址
+        filePath: tempFilePaths[0],
+        name: 'file',
+        formData: {
+          type:'7'
+        },
+        header: {
+          "Content-Type": "multipart/form-data"
+        },
+        success: res => {
+          console.log(res)
+          var resObj = JSON.parse(res.data);
+          console.log(resObj)
+          if (resObj.success == true) {
+            // that.setData({
+            //   images: resObj.RESULT
+            // })
+            success(resObj.data)
+          } else {
+            // showToast(resObj.MESSAGE, 'none', (success) => {})
+          }
+        }
       })
     }
   })
@@ -312,4 +352,5 @@ module.exports = {
   requestGet: requestGet,
   requestGets: requestGets,
   getopenid: getopenid,
+  chooseImage:chooseImage
 }

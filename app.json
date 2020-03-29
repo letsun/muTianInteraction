@@ -1,10 +1,10 @@
 {
     "pages": [
-        "pages/addbatch/addbatch",
-        "pages/home/home",
-        "pages/uploadbatch/uploadbatch",
         "pages/index/index",
- 
+        "pages/home/home",
+        "pages/login/login",
+        "pages/addbatch/addbatch",
+        "pages/uploadbatch/uploadbatch",
         "pages/logs/logs"
     ],
     "window": {

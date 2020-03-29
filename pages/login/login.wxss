@@ -1,0 +1,88 @@
+/* pages/menwei/index/index.wxss */
+
+page {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  /* background: url(../images/1_1.png) no-repeat; */
+
+  background:url(https://qdwzvue-1254182596.cos.ap-guangzhou.myqcloud.com/qdwzAct/paide/1_1.png) no-repeat 100% 100%;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 500rpx;
+  width: 650rpx;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.content .logo {
+  position: absolute;
+  top: -110rpx;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.content .logo image {
+  max-width: 220rpx;
+  max-height: 220rpx;
+}
+
+.content .input-item {
+  border-bottom: 1rpx solid #ddd;
+  margin-left: 70rpx;
+  margin-right: 70rpx;
+  display: flex;
+  padding: 0rpx 20rpx 0rpx 20rpx;
+}
+
+.content .input-item:first-child {
+  padding-top: 110rpx;
+}
+
+.content .input-item input {
+  margin-left: 30rpx;
+  padding: 30rpx 0rpx 30rpx 0rpx;
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.content .input-item label {
+  margin: auto;
+}
+
+.content .input-item label image {
+  max-height: 32rpx;
+  max-width: 24rpx;
+}
+
+/* 去除默认button边框 */
+button::after{
+  border: none;
+}
+/* input框 placeholder样式 */
+.placeholderStyle {
+  color: #ddd;
+  font-size: 28rpx;
+}
+
+.content button {
+  color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  width: 500rpx;
+  border-radius: 50rpx;
+  background:linear-gradient(#fcbb01, #f68400); 
+  margin-top: 50rpx;
+  letter-spacing: 5rpx;
+}

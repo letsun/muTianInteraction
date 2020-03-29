@@ -147,6 +147,7 @@
 }
 
 .table {
+    display: none;
     margin: 0 30rpx;
     text-align: center;
     border: 2rpx solid #E4E4E4;
@@ -222,7 +223,7 @@
     right: 0;
 }
 
-.table-con-item-text-img {   
+.table-con-item-text-img {
     position: absolute;
     right: -5rpx;
     top: 0;
@@ -230,10 +231,11 @@
     width: 60rpx;
     border-left: 1rpx solid #E4E4E4;
 }
+
 .table-con-item-text-img image {
     max-width: 15rpx;
     max-height: 13rpx;
-    
+
 }
 
 .table-con-item:last-child {}
@@ -250,6 +252,13 @@
 
 .table-con-item-text:last-child {
     width: 47%;
+  
+}
+
+.table-con-item-text:last-child input {
+    height: 60rpx;
+    text-align: left;
+    border: 1rpx solid red;
 }
 
 
@@ -275,6 +284,12 @@
 
 .table-footer-item:last-child {
     width: 42%;
+}
+
+.con-button {
+    border-radius: 10rpx;
+
+
 }
 
 
@@ -368,35 +383,37 @@
     max-height: 13rpx;
 }
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list:before,
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list:after {
-    content: " ";
-    display: table;
-}
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list:after {
-    clear: both;
-}
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list .img-item {
+.container .scroll-wrapper .content .wrapper .form .form-item .form-val  .img-item {
     position: relative;
     float: left;
     width: 30%;
     margin-left: 5%;
     margin-top: 25rpx;
+    line-height: 225rpx;
+    height: 200rpx;
+    text-align: center;
+    border: 1rpx solid #ddd;
 }
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list .img-item:nth-of-type(3n+1) {
+.container .scroll-wrapper .content .wrapper .form .form-item .form-val  .img-item:nth-of-type(3n+1) {
     margin-left: 0;
 }
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list .img-item .img {
-    display: block;
-    width: 100%;
-    max-height: 86rpx;
+.container .scroll-wrapper .content .wrapper .form .form-item .form-val  .img-item .uplodimg {
+    width: 71rpx;
+    height: 63rpx;
+
 }
 
-.container .scroll-wrapper .content .wrapper .form .form-item .form-val .img-list .img-item .close {
+.container .scroll-wrapper .content .wrapper .form .form-item .form-val  .img-item .img {
+ 
+    width: 100%;
+    max-height: 200rpx;
+}
+
+.container .scroll-wrapper .content .wrapper .form .form-item .form-val  .img-item .close {
     position: absolute;
     right: -15rpx;
     top: -15rpx;
@@ -425,4 +442,13 @@
 
 .tfooter {
     height: 100rpx;
+}
+
+.canvasa {
+    
+    height: 450px;
+    width: 360px;
+    margin: auto;
+    border-radius: 15rpx;
+    box-shadow: 0 0 5px 1px #e5e5e5;
 }

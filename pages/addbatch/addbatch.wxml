@@ -8,7 +8,6 @@
 					<image class="nav-img" src="../images/2/2_1.png" />
 					<view class="nav-text">未上传批次</view>
 				</view>
-
 			</a>
 			<!-- <view class="line"></view> -->
 		</view>
@@ -35,217 +34,219 @@
 					<view class="title-item">生产日期</view>
 				</view>
 				<view class="list">
-					<view class="item">
-						<view class="item-con">20181203-1-0003</view>
-						<view class="item-con">白砂糖50KG</view>
-						<view class="item-con">423</view>
-						<view class="item-con">2018-12-03</view>
+					<view class="item" wx:for="{{batchList}}" wx:key="xxx">
+						<view class="item-con">{{item.batchNo}}</view>
+						<view class="item-con">{{item.productName}}</view>
+						<view class="item-con">{{item.quantity}}</view>
+						<view class="item-con">{{item.produceTime}}</view>
 					</view>
 				</view>
+				<form bindsubmit="saveCheckItem">
+					<view class="table">
 
-				<view class="table">
-					<view class="table-title">
-						<view class="table-title-item">
-							检验项目
-						</view>
-						<view class="table-title-item">
-							单位
-						</view>
-						<view class="table-title-item">
-							理化结果
-						</view>
-					</view>
-
-					<view class="table-con">
-						<view class="table-con-left">
-							<view class="table-con-left-text">感官项目</view>
-
+						<view class="table-title">
+							<view class="table-title-item">
+								检验项目
+							</view>
+							<view class="table-title-item">
+								单位
+							</view>
+							<view class="table-title-item">
+								理化结果
+							</view>
 						</view>
 
-						<view class="table-con-right">
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									外观
+						<view class="table-con">
+							<view class="table-con-left">
+								<view class="table-con-left-text">感官项目</view>
+
+							</view>
+
+							<view class="table-con-right">
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										外观
+									</view>
+									<view class="table-con-item-text">
+
+									</view>
+									<view class="table-con-item-text">
+										<picker bindchange="appearance" range="{{appearance}}">{{appearance[indexx]}}</picker>
+										<view class="table-con-item-text-img">
+											<image src="../images/2/4_2.png"></image>
+										</view>
+									</view>
 								</view>
-								<view class="table-con-item-text">
 
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										气味
+									</view>
+									<view class="table-con-item-text">
+
+									</view>
+									<view class="table-con-item-text">
+										<picker bindchange="small" range="{{small}}">{{small[indexxx]}}</picker>
+										<view class="table-con-item-text-img">
+											<image src="../images/2/4_2.png"></image>
+										</view>
+									</view>
 								</view>
-								<view class="table-con-item-text">
-									<picker>合格</picker>
-									<view class="table-con-item-text-img">
-										<image src="../images/2/4_2.png"></image>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										粒度≥80%
+									</view>
+									<view class="table-con-item-text">
+										%
+									</view>
+									<view class="table-con-item-text">
+										<input name="granularity"></input>
 									</view>
 								</view>
 							</view>
+						</view>
 
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									气味
-								</view>
-								<view class="table-con-item-text">
 
+						<view class="table-con">
+							<view class="table-con-left" style="border:none">
+
+								<view class="table-con-left-text">理化项目</view>
+
+							</view>
+
+							<view class="table-con-right">
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										蔗糖≥
+									</view>
+									<view class="table-con-item-text">
+										g/100g
+									</view>
+									<view class="table-con-item-text">
+										<input name="sucroseContent"></input>
+									</view>
 								</view>
-								<view class="table-con-item-text">
-									<picker>合格</picker>
-									<view class="table-con-item-text-img">
-										<image src="../images/2/4_2.png"></image>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										还原糖分≤
+									</view>
+									<view class="table-con-item-text">
+										g/100g
+									</view>
+									<view class="table-con-item-text">
+										<input name="reducingSugar"></input>
+									</view>
+								</view>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										电导灰分≤
+									</view>
+									<view class="table-con-item-text">
+										g/100g
+									</view>
+									<view class="table-con-item-text">
+										<input name="conductanceAsh"></input>
+									</view>
+								</view>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										干燥失重≤
+									</view>
+									<view class="table-con-item-text">
+										g/100g
+									</view>
+									<view class="table-con-item-text">
+										<input name="wet"></input>
+									</view>
+								</view>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										色值≤
+									</view>
+									<view class="table-con-item-text">
+										IU
+									</view>
+									<view class="table-con-item-text">
+										<input name="colorValue"></input>
+									</view>
+								</view>
+
+								<view class="table-con-item">
+									<view class="table-con-item-text">
+										浑浊度≤
+									</view>
+									<view class="table-con-item-text">
+										MAU
+									</view>
+									<view class="table-con-item-text">
+										<input name="turbidity"></input>
+									</view>
+								</view>
+
+								<view class="table-con-item" style="border-bottom:none">
+									<view class="table-con-item-text">
+										不溶于水杂质≤
+									</view>
+									<view class="table-con-item-text">
+										mg/kg
+									</view>
+									<view class="table-con-item-text">
+										<input name="insolubleMatter"></input>
 									</view>
 								</view>
 							</view>
+						</view>
 
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									粒度≥80%
-								</view>
-								<view class="table-con-item-text">
-									%
-								</view>
-								<view class="table-con-item-text">
-									93
-								</view>
+
+						<view class="table-footer">
+							<view class="table-footer-item">
+								二氧化硫(以S02计)≤
+							</view>
+							<view class="table-footer-item">
+								mg/kg
+							</view>
+							<view class="table-footer-item">
+								<input name="sulfurDioxide"></input>
+							</view>
+						</view>
+
+						<view class="table-footer">
+							<view class="table-footer-item">
+								重量
+							</view>
+							<view class="table-footer-item">
+								T
+							</view>
+							<view class="table-footer-item">
+								<input name="weight"></input>
+							</view>
+						</view>
+
+						<view class="table-footer">
+							<view class="table-footer-item">
+								白砂糖等级
+							</view>
+							<view class="table-footer-item">
+
+							</view>
+							<view class="table-footer-item">
+								1
 							</view>
 						</view>
 					</view>
 
-
-					<view class="table-con">
-						<view class="table-con-left" style="border:none">
-
-							<view class="table-con-left-text">理化项目</view>
-
-						</view>
-
-						<view class="table-con-right">
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									蔗糖≥
-								</view>
-								<view class="table-con-item-text">
-									g/100g
-								</view>
-								<view class="table-con-item-text">
-									99.7
-								</view>
-							</view>
-
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									还原糖分≤
-								</view>
-								<view class="table-con-item-text">
-									g/100g
-								</view>
-								<view class="table-con-item-text">
-									0.02
-								</view>
-							</view>
-
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									电导灰分≤
-								</view>
-								<view class="table-con-item-text">
-									g/100g
-								</view>
-								<view class="table-con-item-text">
-									0.02
-								</view>
-							</view>
-
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									干燥失重≤
-								</view>
-								<view class="table-con-item-text">
-									g/100g
-								</view>
-								<view class="table-con-item-text">
-									0.02
-								</view>
-							</view>
-
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									色值≤
-								</view>
-								<view class="table-con-item-text">
-									IU
-								</view>
-								<view class="table-con-item-text">
-									112
-								</view>
-							</view>
-
-							<view class="table-con-item">
-								<view class="table-con-item-text">
-									浑浊度≤
-								</view>
-								<view class="table-con-item-text">
-									MAU
-								</view>
-								<view class="table-con-item-text">
-									91
-								</view>
-							</view>
-
-							<view class="table-con-item" style="border-bottom:none">
-								<view class="table-con-item-text">
-									不溶于水杂质≤
-								</view>
-								<view class="table-con-item-text">
-									mg/kg
-								</view>
-								<view class="table-con-item-text">
-									16
-								</view>
-							</view>
-						</view>
-					</view>
-
-
-					<view class="table-footer">
-						<view class="table-footer-item">
-							二氧化硫(以S02计)≤
-						</view>
-						<view class="table-footer-item">
-							mg/kg
-						</view>
-						<view class="table-footer-item">
-							2
-						</view>
-					</view>
-
-					<view class="table-footer">
-						<view class="table-footer-item">
-							重量
-						</view>
-						<view class="table-footer-item">
-							T
-						</view>
-						<view class="table-footer-item">
-							87.000
-						</view>
-					</view>
-
-					<view class="table-footer">
-						<view class="table-footer-item">
-							白砂糖等级
-						</view>
-						<view class="table-footer-item">
-
-						</view>
-						<view class="table-footer-item">
-							1
-						</view>
-					</view>
-
-				</view>
-
+					<button class="con-button" form-type="submit" style="display:none">生成报告</button>
+				</form>
 				<view class="form">
 					<view class="form-item">
 						<view class="form-key">产检责任人</view>
 						<view class="form-val">
-							<input type="text" class="form-input" />
+							<input type="text" class="form-input" bindinput="uploadBy" />
 						</view>
 					</view>
 					<view class="form-item">
@@ -264,7 +265,7 @@
 						<view class="form-key">产检等级</view>
 						<view class="form-val">
 							<select class="form-input select-text">
-								<picker>1</picker>
+								<picker bindchange="levelList" value="{{index}}" range="{{levelList}}" range-key="name">{{levelList[index].name}}</picker>
 							</select>
 							<image class="direction" src="../images/2/4_2.png" />
 						</view>
@@ -272,35 +273,28 @@
 					<view class="form-item">
 						<view class="form-key">产检报告</view>
 						<view class="form-val">
-							<view class="img-list">
-								<view class="img-item">
-									<image class="img" src="../images/2/1_1.png" />
-									<image class="close" src="../images/2/4_3.png" />
-								</view>
-
-								<view class="img-item">
-									<image class="img" src="../images/2/1_1.png" />
-									<image class="close" src="../images/2/4_3.png" />
-								</view>
-								<view class="img-item">
-									<image class="img" src="../images/2/1_1.png" />
-									<image class="close" src="../images/2/4_3.png" />
-								</view>
-								<view class="img-item">
-									<image class="img" src="../images/2/1_1.png" />
-									<image class="close" src="../images/2/4_3.png" />
-								</view>
+							<view class="img-item" bindtap="upload" wx:if="{{url==''}}">
+								<image class="uplodimg" src="../images/1_6.png"></image>
+							</view>
+							<view class="img-item" wx:else>
+									<image class="img" src="{{url}}" />
+									<image class="close"  src="../images/2/4_3.png" bindtap="close" />
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-
 		</view>
 	</view>
 
 
+	<!-- <view class="canvasa">
+		<canvas canvas-id="firstCanvas" style="width:690rpx;height:900rpx"></canvas>
+	</view> -->
 	<view class="tfooter"></view>
-	<view class="upload-btn">保存</view>
+	<view class="upload-btn" bindtap="saveBatchCheck">保存</view>
+
+
+
 
 </view>
