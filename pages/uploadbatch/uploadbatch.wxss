@@ -136,9 +136,10 @@
     width: 140rpx;
   }
 
-  .container .upload-btn {
+  .container .footer {
     position: fixed;
     left: 0;
+    right: 0;
     bottom: 0;
     z-index: 1;
     width: 100%;
@@ -149,5 +150,17 @@
     color: #fff;
     font-weight: 700;
     background: #ffad37;
+    display: flex;
+  }
+
+  .footer-span {
+    position: absolute;
+    left: 50%;
+    border-right: 2rpx solid #f4f4f4;
+    height: 80rpx;
+  }
+
+  .container .upload-btn {
+    width: 50%;
   }
   

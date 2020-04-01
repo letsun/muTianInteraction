@@ -42,5 +42,18 @@
 			</view>
 		</view>
 	</view>
-	<view class="upload-btn" bindtap="addbatch" wx:if="{{indexa==0}}">上传产检报告</view>
+
+	<view class="footer" wx:if="{{indexa==0}}">
+		<view class="upload-btn" bindtap="upbatch">上传产检报告</view>
+		<span class='footer-span'></span>
+		<view class="upload-btn" bindtap="addbatch">新增</view>
+	</view>
+
+	<view class="footer" wx:if="{{indexa==1}}" style="display:block" bindtap="editbatch">
+		编辑
+	</view>
+
+
+
+
 </view>

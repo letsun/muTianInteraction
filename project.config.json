@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
@@ -75,6 +75,13 @@
 					"id": -1,
 					"name": "上传质检报告",
 					"pathName": "pages/addbatch/addbatch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "编辑",
+					"pathName": "pages/editbatch/editbatch",
 					"query": "",
 					"scene": null
 				}

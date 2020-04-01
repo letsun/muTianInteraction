@@ -280,6 +280,53 @@ function requestGets(url, data, success) {
   })
 }
 
+
+/***
+ * 带加载
+ * post请求
+ *url:请求地址 
+ * data:请求数据
+ * res:回调
+ * fali:失败回调
+ */
+
+function requestGetf(url, data, success,fail) {
+
+  wx.request({
+    url: url,
+    method: "GET",
+    header: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'content-type': "application/x-www-form-urlencoded",
+    },
+
+    data: data,
+    success: res => {
+
+      if (res.data.status == 1) {
+        success(res)
+   
+      } else {
+        fail(res)
+   
+       
+      }
+    },
+
+    fail: res => {
+      wx.hideLoading();
+      showToast('网络异常，请重新刷新页面', 'none', res => { })
+    },
+
+    complete: res => {
+      // wx.hideLoading();
+    }
+
+  })
+
+}
+
 /***
  * 
  * 获取openid
@@ -349,8 +396,10 @@ module.exports = {
   requestPost: requestPost,
   requestPosts: requestPosts,
   requestPostf:requestPostf,
+
   requestGet: requestGet,
   requestGets: requestGets,
+  requestGetf:requestGetf,
   getopenid: getopenid,
   chooseImage:chooseImage
 }

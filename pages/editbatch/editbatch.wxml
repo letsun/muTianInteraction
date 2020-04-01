@@ -1,3 +1,4 @@
+<!--pages/editbatch/editbatch.wxml-->
 <view class="container">
 	<form bindsubmit="saveBatchCheck">
 		<!--导航-->
@@ -6,8 +7,8 @@
 				<a href="javascript:void(0)">
 					<view class="center-wra">
 						<image class="nav-img" src="../images/2/2_1.png" />
-						<view class="nav-text" wx:if='{{types==0}}'>未上传批次</view>
-						<view class="nav-text" wx:if='{{types==1}}'>添加批次</view>
+
+						<view class="nav-text">编辑批次</view>
 					</view>
 				</a>
 				<!-- <view class="line"></view> -->
@@ -30,28 +31,26 @@
 		<view class="scroll-wrapper" id="scrollWrapper">
 			<view class="content">
 				<view class="wrapper ">
-					<view class="title" wx:if='{{types==0}}'>
+					<!-- <view class="title" >
 						<view class="title-item">生产批号</view>
 						<view class="title-item">产品名称</view>
 						<view class="title-item">生产数量</view>
 						<view class="title-item">生产日期</view>
 					</view>
-					<view class="list" wx:if='{{types==0}}'>
+					<view class="list" >
 						<view class="item" wx:for="{{batchList}}" wx:key="xxx">
 							<view class="item-con">{{item.batchNo}}</view>
 							<view class="item-con">{{item.productName}}</view>
 							<view class="item-con">{{item.quantity}}</view>
 							<view class="item-con">{{item.produceTime}}</view>
 						</view>
-					</view>
+					</view> -->
 
-
-
-					<view class="form" wx:if='{{types==1}}'>
+					<view class="form" >
 						<view class="form-item">
 							<view class="form-key">生产批次</view>
 							<view class="form-val">
-								<input type="text" class="form-input" bindblur="produceBatchNo" />
+								<input type="text" class="form-input" value="{{getProduceBatchDetail.produceBatch.batchNo}}" bindblur="produceBatchNo" />
 							</view>
 						</view>
 
@@ -91,7 +90,7 @@
 						<view class="form-item">
 							<view class="form-key">生产数量</view>
 							<view class="form-val">
-								<input type="text" class="form-input" bindinput="quantity" />
+								<input type="text" class="form-input" value="{{quantity}}" bindinput="quantity" />
 							</view>
 						</view>
 
@@ -155,7 +154,7 @@
 
 									</view>
 									<view class="table-con-item-text">
-										<picker bindchange="appearance" range="{{appearance}}">{{appearance[indexx]}}</picker>
+										<picker bindchange="appearance" range="{{appearance}}"  value="{{indexx}}">{{appearance[indexx]}}</picker>
 										<view class="table-con-item-text-img">
 											<image src="../images/2/4_2.png"></image>
 										</view>
@@ -170,7 +169,7 @@
 
 									</view>
 									<view class="table-con-item-text">
-										<picker bindchange="small" range="{{small}}">{{small[indexxx]}}</picker>
+										<picker bindchange="small" range="{{small}}" value="{{indexxx}}">{{small[indexxx]}}</picker>
 										<view class="table-con-item-text-img">
 											<image src="../images/2/4_2.png"></image>
 										</view>
@@ -185,7 +184,7 @@
 										%
 									</view>
 									<view class="table-con-item-text">
-										<input name="granularity" bindinput="granularity" type="digit" placeholder="93"></input>
+										<input name="granularity" bindinput="granularity" value="{{granularity}}" type="digit" placeholder="93"></input>
 									</view>
 								</view>
 							</view>
@@ -208,7 +207,7 @@
 										g/100g
 									</view>
 									<view class="table-con-item-text">
-										<input name="sucroseContent" bindinput="sucroseContent" type="digit" placeholder="99.7"></input>
+										<input name="sucroseContent" bindinput="sucroseContent" value="{{sucroseContent}}"  type="digit" placeholder="99.7"></input>
 									</view>
 								</view>
 
@@ -220,7 +219,7 @@
 										g/100g
 									</view>
 									<view class="table-con-item-text">
-										<input name="reducingSugar" bindinput="reducingSugar" type="digit" placeholder="0.02"></input>
+										<input name="reducingSugar"  bindinput="reducingSugar" type="digit" value="{{reducingSugar}}"  placeholder="0.02"></input>
 									</view>
 								</view>
 
@@ -232,7 +231,7 @@
 										g/100g
 									</view>
 									<view class="table-con-item-text">
-										<input name="conductanceAsh" bindinput="conductanceAsh" type="digit" placeholder="0.03"></input>
+										<input name="conductanceAsh" bindinput="conductanceAsh" type="digit" value="{{conductanceAsh}}"  placeholder="0.03"></input>
 									</view>
 								</view>
 
@@ -244,7 +243,7 @@
 										g/100g
 									</view>
 									<view class="table-con-item-text">
-										<input name="wet" type="digit" bindinput="wet" placeholder="0.03"></input>
+										<input name="wet" type="digit" bindinput="wet" value="{{wet}}"  placeholder="0.03"></input>
 									</view>
 								</view>
 
@@ -256,7 +255,7 @@
 										IU
 									</view>
 									<view class="table-con-item-text">
-										<input name="colorValue" type="digit" bindinput="colorValue" placeholder="112"></input>
+										<input name="colorValue" type="digit" bindinput="colorValue" value="{{colorValue}}"  placeholder="112"></input>
 									</view>
 								</view>
 
@@ -268,7 +267,7 @@
 										MAU
 									</view>
 									<view class="table-con-item-text">
-										<input name="turbidity" type="digit" bindinput="turbidity" placeholder="91"></input>
+										<input name="turbidity" type="digit"  bindinput="turbidity" value="{{turbidity}}"  placeholder="91"></input>
 									</view>
 								</view>
 
@@ -280,7 +279,7 @@
 										mg/kg
 									</view>
 									<view class="table-con-item-text">
-										<input name="insolubleMatter" type="digit" bindinput="insolubleMatter" placeholder="16"></input>
+										<input name="insolubleMatter" type="digit"  bindinput="insolubleMatter" value="{{insolubleMatter}}"  placeholder="16"></input>
 									</view>
 								</view>
 							</view>
@@ -294,7 +293,7 @@
 								mg/kg
 							</view>
 							<view class="table-footer-item">
-								<input name="sulfurDioxide" type="digit" bindinput="sulfurDioxide" placeholder="2"></input>
+								<input name="sulfurDioxide" type="digit" bindinput="sulfurDioxide" value="{{sulfurDioxide}}"  placeholder="2"></input>
 							</view>
 						</view>
 
@@ -306,7 +305,7 @@
 								T
 							</view>
 							<view class="table-footer-item">
-								<input name="weight" type="digit" bindinput="weight" placeholder="87.000"></input>
+								<input name="weight" type="digit" bindinput="weight" value="{{weight}}"  placeholder="87.000"></input>
 							</view>
 						</view>
 
@@ -318,7 +317,7 @@
 
 							</view>
 							<view class="table-footer-item">
-								<input name="qualityLevel" type="digit" bindinput="qualityLevel" placeholder="1"></input>
+								<input name="qualityLevel" type="digit" bindinput="qualityLevel" value="{{qualityLevel}}"  placeholder="1"></input>
 							</view>
 						</view>
 					</view>
@@ -329,7 +328,7 @@
 						<view class="form-item">
 							<view class="form-key">产检责任人</view>
 							<view class="form-val">
-								<input type="text" class="form-input" bindinput="uploadBy" />
+								<input type="text" class="form-input" value="{{getProduceBatchDetail.productCheck.uploadBy}}" bindinput="uploadBy" />
 							</view>
 						</view>
 						<view class="form-item">
@@ -363,8 +362,6 @@
 									<image class="img" bindtap="previewImage" src="{{url}}" data-url="{{url}}" />
 									<image class="close" src="../images/2/4_3.png" bindtap="close" />
 								</view>
-
-
 							</view>
 						</view>
 					</view>
@@ -377,13 +374,8 @@
 			<canvas canvas-id="firstCanvas" style="width:710rpx;height:1200rpx;"></canvas>
 		</view>
 
-
-
 		<view class="tfooter"></view>
-
-
-		<button class="upload-btn" form-type="submit" wx:if="{{types==0}}">保存</button>
-		<button class="upload-btn" form-type="submit" wx:if="{{types==1}}">新增</button>
+		<button class="upload-btn" form-type="submit" >保存</button>
 
 	</form>
 

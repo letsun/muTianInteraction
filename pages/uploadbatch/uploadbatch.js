@@ -140,7 +140,7 @@ Page({
 
 
     //上传质检报告
-    addbatch() {
+    upbatch() {
 
         let that = this;
         let batchList = that.data.batchList;
@@ -152,7 +152,34 @@ Page({
             }
         } 
         wx.navigateTo({
-            url: '../addbatch/addbatch?batchIdList=' + batchIdList,
+            url: '../addbatch/addbatch?batchIdList=' + batchIdList + '&types=' +0,
+        })
+    },
+
+
+    //添加质检报告
+
+    addbatch() {
+        wx.navigateTo({
+            url: '../addbatch/addbatch?types=' +1,
+        })
+    },
+
+    //编辑质检报告
+    editbatch() {
+        let that = this;
+        let batchList = that.data.batchList;
+        let batchIdList=[];
+
+        for(let i in batchList) {
+            if(batchList[i].checked) {
+                batchIdList.push(batchList[i].id)  
+            }
+        } 
+
+        console.log(batchIdList)
+        wx.navigateTo({
+            url: '../editbatch/editbatch?batchIdList=' + batchIdList ,
         })
     },
 

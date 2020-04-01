@@ -4,6 +4,7 @@
         "pages/home/home",
         "pages/login/login",
         "pages/addbatch/addbatch",
+        "pages/editbatch/editbatch",
         "pages/uploadbatch/uploadbatch",
         "pages/logs/logs"
     ],

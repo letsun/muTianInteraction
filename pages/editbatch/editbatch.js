@@ -1,3 +1,4 @@
+// pages/editbatch/editbatch.js
 // pages/addbatch/addbatch.js
 const util = require("../../utils/util")
 const app = getApp()
@@ -11,7 +12,6 @@ Page({
     data: {
         pageSize: '20',
         pageNo: 1,
-        index: 0,
         url: '',
 
         appearance: ['不合格', '合格'],
@@ -20,27 +20,31 @@ Page({
         small: ['不合格', '合格'],
         indexxx: 0,
 
-        ind: 0,
-        inda: 0,
-        indaa: 0,
+
+
+        // produceBatchId: '2115'
     },
 
     onLoad(options) {
         console.log(options)
+
         let that = this;
         let batchIdList = options.batchIdList;
+
         that.setData({
-            batchIdList: batchIdList,
-            types: options.types
+            produceBatchId: batchIdList
         })
-        if (options.types == 0) {
-            that.getBatchList();
-        } else {
-            that.getProducts();
-            that.getProduceLines();
-            that.getFactorys()
-        }
-        that.getProductLevelList()
+
+        that.getFactorys(); //工厂
+        that.getProduceLines(); //产线
+        that.getProducts(); //产品
+
+        that.getProductLevelList();//产检等级
+        setTimeout(res => {
+            that.getProduceBatchDetail();
+        }, 1000)
+
+
     },
 
     /**
@@ -48,16 +52,126 @@ Page({
      */
     onShow: function () {
         let that = this;
-        let date = util.formatTime(new Date());
+        // let date = util.formatTime(new Date());
 
-        let time = util.formatTimea(new Date());
-        that.setData({
-            date: date,
-            datea: date,
-            time: time
+        // let time = util.formatTimea(new Date());
+        // that.setData({
+        //     date: date,
+        //     datea: date,
+        //     time: time
+        // })
+    },
+
+
+    //获取生产批次详情
+    getProduceBatchDetail() {
+        let that = this;
+        let produceBatchId = that.data.produceBatchId;
+
+        common.requestGet(api.getProduceBatchDetail, {
+            produceBatchId: produceBatchId
+        }, res => {
+            let getProduceBatchDetail = res.data.data;
+
+            let getFactorys = that.data.getFactorys;//工厂
+            let getProduceLines = that.data.getProduceLines;//产线
+            let getProducts = that.data.getProducts;//产品
+            let levelList = that.data.levelList;  //产检等级
+            
+            // debugger
+            //工厂id
+            for (let i in getFactorys) {
+                if (getFactorys[i].id == getProduceBatchDetail.produceBatch.factoryId) {
+                    var indaa = i;
+                    break;
+                }else{
+                    var indaa = 0
+                }
+            }
+
+            //产线
+            for (let i in getProduceLines) {
+                if (getProduceLines[i].id == getProduceBatchDetail.produceBatch.produceLineId) {
+                    var inda = i;
+                    break;
+                }else {
+                    var inda = 0
+                }
+            }
+
+
+            //产品id
+            for (let i in getProducts) {
+                if (getProducts[i].id == getProduceBatchDetail.produceBatch.productId) {
+                    var ind = i;
+                    break;
+                }else {
+                    var ind = 0
+                }
+            }
+
+            // debugger;
+            //等级
+            for (let i in levelList) {
+                if (levelList[i].id == getProduceBatchDetail.productCheck.levelId) {
+                    var index = i;
+                    break;
+                }else {
+                    var index = 0;
+                }
+            }
+
+            let produceTimeStr = getProduceBatchDetail.produceBatch.produceTimeStr;
+            var str = produceTimeStr.split(' ');
+
+            that.setData({
+                getProduceBatchDetail: getProduceBatchDetail,
+                produceBatchNo: getProduceBatchDetail.produceBatch.batchNo,
+                quantity: getProduceBatchDetail.produceBatch.quantity,
+                uploadBy: getProduceBatchDetail.productCheck.uploadBy,
+                index: index,
+
+                ind: ind,
+                inda: inda,
+                indaa: indaa,
+
+                url: getProduceBatchDetail.productCheck.url,
+                date: getProduceBatchDetail.productCheck.uploadTime,
+                datea: str[0],
+                time: str[1],
+            })
+
+            //  debugger
+            if (getProduceBatchDetail.produceQualityItems!=''&&getProduceBatchDetail.produceQualityItems!=undefined) {
+                if (getProduceBatchDetail.produceQualityItems[0].result == '不合格') {
+                    var indexx = 0
+                } else {
+                    var indexx = 1
+                }
+    
+                if (getProduceBatchDetail.produceQualityItems[1].result == '不合格') {
+                    var indexxx = 0
+                } else {
+                    var indexxx = 1
+                }
+
+                that.setData({
+                    granularity: getProduceBatchDetail.produceQualityItems[2].result,
+                    sucroseContent: getProduceBatchDetail.produceQualityItems[3].result,
+                    reducingSugar: getProduceBatchDetail.produceQualityItems[4].result,
+                    conductanceAsh: getProduceBatchDetail.produceQualityItems[5].result,
+                    wet: getProduceBatchDetail.produceQualityItems[6].result,
+                    colorValue: getProduceBatchDetail.produceQualityItems[7].result,
+                    turbidity: getProduceBatchDetail.produceQualityItems[8].result,
+                    insolubleMatter: getProduceBatchDetail.produceQualityItems[9].result,
+                    sulfurDioxide: getProduceBatchDetail.produceQualityItems[10].result,
+                    weight: getProduceBatchDetail.produceQualityItems[11].result,
+                    qualityLevel: getProduceBatchDetail.produceQualityItems[12].result,
+                    indexx: indexx,
+                    indexxx: indexxx,
+                })
+            }
         })
-
-
     },
 
 
@@ -184,34 +298,25 @@ Page({
 
         if (granularity == '') {
             common.showToast('粒度不能为空', 'none', res => { })
-            return false;
         } else if (sucroseContent == '') {
             common.showToast('蔗糖分不能为空', 'none', res => { })
-            return false;
         } else if (reducingSugar == '') {
             common.showToast('还原糖分不能为空', 'none', res => { })
-            return false;
         } else if (conductanceAsh == '') {
             common.showToast('电导灰分不能为空', 'none', res => { })
-            return false;
         } else if (wet == '') {
             common.showToast('干燥失重不能为空', 'none', res => { })
-            return false;
         } else if (colorValue == '') {
             common.showToast('色值不能为空', 'none', res => { })
             return false;
         } else if (turbidity == '') {
             common.showToast('浑浊度不能为空', 'none', res => { })
-            return false;
         } else if (insolubleMatter == '') {
             common.showToast('不溶于水杂质不能为空', 'none', res => { })
-            return false;
         } else if (sulfurDioxide == '') {
             common.showToast('二氧化硫不能为空', 'none', res => { })
-            return false;
         } else if (weight == '') {
             common.showToast('重量不能为空', 'none', res => { })
-            return false;
         }
 
         let produceQualityItems = [{
@@ -285,29 +390,17 @@ Page({
         productCheck.uploadTime = that.data.date;
         productCheck.url = that.data.url;
 
-        if (that.data.types == 0) {
-            var batchIdList = that.data.batchIdList;
-            batchIdList = batchIdList.split(",")
-        } else {
-            var batchIdList = '';
-        }
-        let productBatch = {};
-        var batchIdList = that.data.batchIdList;
+        var batchIdList = that.data.produceBatchId;
         batchIdList = batchIdList.split(",")
-        if (that.data.types == 1) {
-
-            productBatch.corporationId = app.globalData.corpId;	        //糖企id	number	
-            productBatch.factoryId = that.data.getFactorys[that.data.indaa].id;	                //工厂id	number	
-            productBatch.batchNo = that.data.produceBatchNo;	       // 批次号	string	
-            productBatch.produceLineId = that.data.getProduceLines[that.data.inda].id;	        //产线id	number	
-            productBatch.produceTimeStr = that.data.datea + ' ' + that.data.time;	        //生产时间	string	
-            productBatch.productId = that.data.getProducts[that.data.ind].id;	                //产品id	number	
-            productBatch.quantity = that.data.quantity;     //生产数量
-        }else {
-            productBatch.id = batchIdList[0];
-        }
-
-
+        let productBatch = {};
+        productBatch.corporationId = app.globalData.corpId;	        //糖企id	number	
+        productBatch.factoryId = that.data.getFactorys[that.data.indaa].id;	                //工厂id	number	
+        productBatch.batchNo = that.data.produceBatchNo;	       // 批次号	string	
+        productBatch.produceLineId = that.data.getProduceLines[that.data.inda].id;	        //产线id	number	
+        productBatch.produceTimeStr = that.data.datea + ' ' + that.data.time;	        //生产时间	string	
+        productBatch.productId = that.data.getProducts[that.data.ind].id;	                //产品id	number	
+        productBatch.quantity = that.data.quantity;     //生产数量
+        productBatch.id = batchIdList[0];
         wx.request({
             url: api.saveBatchCheck,
             method: "POST",
@@ -441,225 +534,225 @@ Page({
         let textTop = 150 //头部距离顶部距离
         let Unitwidth = 70;  //单位宽度 
         let Unitleft = 140; //距离左边 
-
+    
         let resultWidtg = 135; //理化结果宽度
-
+    
         let resultleft = 210//理化结果距离左边 
-
+    
         // that.roundRect(ctx, 10, 10, 345, 30, 0, '#F9F9F9', '#F9F9F9')
         ctx.setTextAlign('center');
         ctx.setFillStyle('#F9F9F9');
         ctx.fillRect(10, 160, 335, height)
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd')
         ctx.strokeRect(10, top, 130, height);
         let text1 = '检验项目';
         ctx.setFontSize(12);
         ctx.fillText(text1, 75, height + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
-        ctx.strokeRect(140, top, 70, height);
+        ctx.strokeRect(140, top, 70, height );
         let text2 = '单位';
         ctx.setFontSize(12);
         ctx.fillText(text2, 175, height + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(210, top, 135, height);
         let text3 = '理化结果';
         ctx.setFontSize(12);
         ctx.fillText(text3, 275, height + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(10, top + height, 35, 90);
         let text4 = '感官项目';
         ctx.setFontSize(12);
         that.fillTextWrap(ctx, text4, 28, top + 55, 7, 15);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(10, top + height, 35, 300);
         let text5 = '理化项目';
         ctx.setFontSize(12);
         that.fillTextWrap(ctx, text5, 28, top + 200, 7, 15)
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height, 95, height);
         let text6 = '外观';
         ctx.setFontSize(12);
         ctx.fillText(text6, 92, height * 2 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 2, 95, height);
         let text7 = '气味';
         ctx.setFontSize(12);
         ctx.fillText(text7, 92, height * 3 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 3, 95, height);
         let text8 = '粒度≥80%';
         ctx.setFontSize(12);
         ctx.fillText(text8, 92, height * 4 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 4, 95, height);
         let text9 = '蔗糖';
         ctx.setFontSize(12);
         ctx.fillText(text9, 92, height * 5 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 5, 95, height);
         let text10 = '还原糖分≤';
         ctx.setFontSize(12);
         ctx.fillText(text10, 92, height * 6 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 6, 95, height);
         let text11 = '电导灰分≤';
         ctx.setFontSize(12);
         ctx.fillText(text11, 92, height * 7 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 7, 95, height);
         let text12 = '干燥失重≤';
         ctx.setFontSize(12);
-
+    
         ctx.fillText(text12, 92, height * 8 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 8, 95, height);
         let text13 = '色值≤';
         ctx.setFontSize(12);
         ctx.fillText(text13, 92, height * 9 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 9, 95, height);
         let text14 = '浑浊度≤';
         ctx.setFontSize(12);
         ctx.fillText(text14, 92, height * 10 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(45, top + height * 10, 95, height);
         let text15 = '不溶于水杂质≤';
         ctx.setFontSize(12);
         ctx.fillText(text15, 92, height * 11 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
-        ctx.strokeRect(10, top + height * 11, 130, height);
+        ctx.strokeRect(10, top + height * 11,130, height);
         let text16 = '二氧化硫(以S02计)≤';
         ctx.setFontSize(12);
         ctx.fillText(text16, 75, height * 12 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(10, top + height * 12, 130, height);
         let text17 = '重量';
         ctx.setFontSize(12);
         ctx.fillText(text17, 75, height * 13 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(10, top + height * 13, 130, height);
         let text18 = '白砂糖等级';
         ctx.setFontSize(12);
         ctx.fillText(text18, 75, height * 14 + textTop);
-
-
+    
+    
         //单位
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 1, Unitwidth, height)
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 2, Unitwidth, height)
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 3, Unitwidth, height)
         let Unittext1 = '%';
         ctx.fillText(Unittext1, 175, height * 4 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 4, Unitwidth, height)
         let Unittext2 = 'g/100g';
         ctx.fillText(Unittext2, 175, height * 5 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 5, Unitwidth, height)
         let Unittext3 = 'g/100g';
         ctx.fillText(Unittext3, 175, height * 6 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 6, Unitwidth, height)
         let Unittext4 = 'g/100g';
         ctx.fillText(Unittext4, 175, height * 7 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 7, Unitwidth, height)
         let Unittext5 = 'g/100g';
         ctx.fillText(Unittext5, 175, height * 8 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 8, Unitwidth, height)
         let Unittext6 = 'IU';
         ctx.fillText(Unittext6, 170, height * 9 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 9, Unitwidth, height)
         let Unittext7 = 'MAU';
         ctx.fillText(Unittext7, 175, height * 10 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 10, Unitwidth, height)
         let Unittext8 = 'mg/kg';
         ctx.fillText(Unittext8, 175, height * 11 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 11, Unitwidth, height)
         let Unittext9 = 'mg/kg';
         ctx.fillText(Unittext9, 175, height * 12 + textTop);
-
-
+    
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 12, Unitwidth, height)
         let Unittext10 = 'T';
         ctx.fillText(Unittext10, 175, height * 13 + textTop);
-
+    
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(Unitleft, top + height * 13, Unitwidth, height)
@@ -894,7 +987,7 @@ Page({
 
 
 
-    //产线列表
+    //工厂列表
     getFactorys() {
         let that = this;
         common.requestGet(api.getFactorys, {
@@ -922,9 +1015,9 @@ Page({
             produceBatchNo: produceBatchNo
         })
 
-        if (that.data.types == 1) {
-            that.checkBatchNo(produceBatchNo)
-        }
+
+        that.checkBatchNo(produceBatchNo)
+
 
 
     },
@@ -936,7 +1029,7 @@ Page({
         common.requestGetf(api.checkBatchNo, {
             batchNo: produceBatchNo,
             corpId: app.globalData.corpId,
-
+            produceBatchId: that.data.produceBatchId
         }, res => {
 
         }, reg => {

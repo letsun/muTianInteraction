@@ -1,3 +1,4 @@
+/* pages/editbatch/editbatch.wxss */
 /* pages/addbatch/addbatch.wxss */
 .container {
     position: relative;
@@ -456,8 +457,8 @@
 }
 
 .canvasa {
+    position: fixed;
+    bottom: -100px;
     height: 0px;
     overflow: hidden;
-    position: fixed;
-    bottom: -100rpx;
 }
