@@ -1033,7 +1033,12 @@ Page({
         }, res => {
 
         }, reg => {
-            common.showToast(reg.data.msg, 'none', res => { })
+            common.showToast(reg.data.msg, 'none', res => {
+                
+                that.setData({
+                    produceBatchNo:that.data.getProduceBatchDetail.produceBatch.batchNo
+                })
+             })
         })
     },
 

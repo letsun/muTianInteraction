@@ -25,7 +25,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
-	"appid": "wx92ddcbce04fc34b6",
+	"appid": "wx9a3a4316470a3231",
 	"projectname": "muTianInteraction",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -83,6 +83,12 @@
 					"name": "编辑",
 					"pathName": "pages/editbatch/editbatch",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
 					"scene": null
 				}
 			]

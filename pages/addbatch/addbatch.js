@@ -14,15 +14,19 @@ Page({
         index: 0,
         url: '',
 
-        appearance: ['不合格', '合格'],
+        appearance: ['合格', '不合格'],
         indexx: 0,
 
-        small: ['不合格', '合格'],
+        small: ['合格', '不合格'],
         indexxx: 0,
 
         ind: 0,
         inda: 0,
         indaa: 0,
+
+        uploadBy:'',
+        // produceBatchNo:'',
+        // quantity:'',
     },
 
     onLoad(options) {
@@ -56,8 +60,6 @@ Page({
             datea: date,
             time: time
         })
-
-
     },
 
 
@@ -81,8 +83,6 @@ Page({
     },
 
 
-
-
     //生产批次列表
     getBatchList() {
         let that = this;
@@ -100,7 +100,6 @@ Page({
 
         })
     },
-
 
 
     //产检等级
@@ -182,37 +181,49 @@ Page({
         let weight = e.detail.value.weight;
         let wet = e.detail.value.wet;
 
-        if (granularity == '') {
-            common.showToast('粒度不能为空', 'none', res => { })
-            return false;
-        } else if (sucroseContent == '') {
-            common.showToast('蔗糖分不能为空', 'none', res => { })
-            return false;
-        } else if (reducingSugar == '') {
-            common.showToast('还原糖分不能为空', 'none', res => { })
-            return false;
-        } else if (conductanceAsh == '') {
-            common.showToast('电导灰分不能为空', 'none', res => { })
-            return false;
-        } else if (wet == '') {
-            common.showToast('干燥失重不能为空', 'none', res => { })
-            return false;
-        } else if (colorValue == '') {
-            common.showToast('色值不能为空', 'none', res => { })
-            return false;
-        } else if (turbidity == '') {
-            common.showToast('浑浊度不能为空', 'none', res => { })
-            return false;
-        } else if (insolubleMatter == '') {
-            common.showToast('不溶于水杂质不能为空', 'none', res => { })
-            return false;
-        } else if (sulfurDioxide == '') {
-            common.showToast('二氧化硫不能为空', 'none', res => { })
-            return false;
-        } else if (weight == '') {
-            common.showToast('重量不能为空', 'none', res => { })
-            return false;
+        if(that.data.types==0) {
+            if (granularity == '') {
+                common.showToast('粒度不能为空', 'none', res => { })
+                return false;
+            } else if (sucroseContent == '') {
+                common.showToast('蔗糖分不能为空', 'none', res => { })
+                return false;
+            } else if (reducingSugar == '') {
+                common.showToast('还原糖分不能为空', 'none', res => { })
+                return false;
+            } else if (conductanceAsh == '') {
+                common.showToast('电导灰分不能为空', 'none', res => { })
+                return false;
+            } else if (wet == '') {
+                common.showToast('干燥失重不能为空', 'none', res => { })
+                return false;
+            } else if (colorValue == '') {
+                common.showToast('色值不能为空', 'none', res => { })
+                return false;
+            } else if (turbidity == '') {
+                common.showToast('浑浊度不能为空', 'none', res => { })
+                return false;
+            } else if (insolubleMatter == '') {
+                common.showToast('不溶于水杂质不能为空', 'none', res => { })
+                return false;
+            } else if (sulfurDioxide == '') {
+                common.showToast('二氧化硫不能为空', 'none', res => { })
+                return false;
+            } else if (weight == '') {
+                common.showToast('重量不能为空', 'none', res => { })
+                return false;
+            }
+
+            if (that.data.uploadBy == '') {
+                common.showToast('产检负责人不能为空', 'none', res => { })
+                return false;
+            }
+            if (that.data.url == '') {
+                common.showToast('请上传产检报告', 'none', res => { })
+                return false;
+            }
         }
+
 
         let produceQualityItems = [{
             'index': 0,
@@ -268,19 +279,16 @@ Page({
 
 
 
-        if (that.data.uploadBy == '') {
-            common.showToast('产检负责人不能为空', 'none', res => { })
-            return false;
-        }
-        if (that.data.url == '') {
-            common.showToast('请上传产检报告', 'none', res => { })
-            return false;
-        }
+
         let index = that.data.index;
         let levelList = that.data.levelList;
         let productCheck = {};
-        productCheck.level = levelList[index].name;
-        productCheck.levelId = levelList[index].id;
+
+        if(levelList!='') {
+            productCheck.level = levelList[index].name;
+            productCheck.levelId = levelList[index].id;
+        }
+
         productCheck.uploadBy = that.data.uploadBy;
         productCheck.uploadTime = that.data.date;
         productCheck.url = that.data.url;
@@ -292,47 +300,86 @@ Page({
             var batchIdList = '';
         }
         let productBatch = {};
-        var batchIdList = that.data.batchIdList;
-        batchIdList = batchIdList.split(",")
+        // var batchIdList = that.data.batchIdList;
+        // batchIdList = batchIdList.split(",")
+
+        var  produceBatchNo  = that.data.produceBatchNo;
+        var  quantity  = that.data.quantity;
+
+
+// debugger
         if (that.data.types == 1) {
+            if (produceBatchNo==''||produceBatchNo==undefined){
+                common.showToast('批次号不能为空', 'none', res => { })
+                return false;
+            }else if(quantity == '' ||quantity==undefined) {
+                common.showToast('生产数量不能为空', 'none', res => { })
+                return false;
+            }
 
             productBatch.corporationId = app.globalData.corpId;	        //糖企id	number	
             productBatch.factoryId = that.data.getFactorys[that.data.indaa].id;	                //工厂id	number	
-            productBatch.batchNo = that.data.produceBatchNo;	       // 批次号	string	
+            productBatch.batchNo = produceBatchNo;	       // 批次号	string	
             productBatch.produceLineId = that.data.getProduceLines[that.data.inda].id;	        //产线id	number	
             productBatch.produceTimeStr = that.data.datea + ' ' + that.data.time;	        //生产时间	string	
             productBatch.productId = that.data.getProducts[that.data.ind].id;	                //产品id	number	
-            productBatch.quantity = that.data.quantity;     //生产数量
+            productBatch.quantity = quantity;     //生产数量
         }else {
             productBatch.id = batchIdList[0];
         }
 
+        if(that.data.uploadBy!='') {
+            wx.request({
+                url: api.saveBatchCheck,
+                method: "POST",
+                data: {
+                    ids: batchIdList,
+                    productCheck: productCheck,
+                    produceQualityItems: produceQualityItems,
+                    productBatch: productBatch
+                },
+                header: {
+                    'Accept': 'application/json',
+                    "content-type": "application/json"
+                },
+                success: (res) => {
+                    if (res.data.status == 1) {
+                        wx.navigateBack({})
+                    } else {
+                        common.showToast(res.data.msg, 'none', res => { })
+                    }
+    
+                },
+            })
+        }else {
+            wx.request({
+                url: api.saveBatchNotCheck,
+                method: "POST",
+                data: {
 
-        wx.request({
-            url: api.saveBatchCheck,
-            method: "POST",
-            data: {
-                ids: batchIdList,
-                productCheck: productCheck,
-                produceQualityItems: produceQualityItems,
-                productBatch: productBatch
-            },
-            header: {
-                'Accept': 'application/json',
-                "content-type": "application/json"
-            },
-            success: (res) => {
-                if (res.data.status == 1) {
-                    wx.navigateBack({})
-                } else {
-                    common.showToast(res.data.msg, 'none', res => { })
-                }
-
-            },
-        })
+                    productBatch: productBatch
+                },
+                header: {
+                    'Accept': 'application/json',
+                    "content-type": "application/json"
+                },
+                success: (res) => {
+                    if (res.data.status == 1) {
+                        wx.navigateBack({})
+                    } else {
+                        common.showToast(res.data.msg, 'none', res => { })
+                    }
+    
+                },
+            })
+        }
 
 
     },
+
+
+
+
     // 文字换行
     fillTextWrap(ctx, text, x, y, maxWidth, lineHeight) {
         // 设定默认最大宽度
@@ -940,7 +987,11 @@ Page({
         }, res => {
 
         }, reg => {
-            common.showToast(reg.data.msg, 'none', res => { })
+            common.showToast(reg.data.msg, 'none', res => {
+                that.setData({
+                    produceBatchNo:''
+                })
+             })
         })
     },
 

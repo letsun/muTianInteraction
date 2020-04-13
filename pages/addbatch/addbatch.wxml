@@ -51,7 +51,7 @@
 						<view class="form-item">
 							<view class="form-key">生产批次</view>
 							<view class="form-val">
-								<input type="text" class="form-input" bindblur="produceBatchNo" />
+								<input type="text" class="form-input" bindblur="produceBatchNo" value="{{produceBatchNo}}" />
 							</view>
 						</view>
 

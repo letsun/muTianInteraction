@@ -52,10 +52,10 @@ Page({
     //userType 1：货主，2：销售科，3：储运科，4：司机，5：门卫
     common.requestPost(api.oaLogin, {
       openId:app.globalData.openid,
-      username:username,
+      mobile:username,
       pwd:password,
     }, (res) => {
-
+      app.globalData.corpId=res.data.data.corpId
       wx.reLaunch({
         url: '../home/home',
       })
