@@ -11,7 +11,7 @@
       <view class="input-item">
 
         <label><image src="https://qdwzvue-1254182596.cos.ap-guangzhou.myqcloud.com/qdwzAct/paide/1_3.png"></image></label>
-        <input placeholder="请输入账号" placeholder-class="placeholderStyle" name="username"></input>
+        <input placeholder="请输入手机号" placeholder-class="placeholderStyle" name="username"></input>
       </view>
 
       <view class="input-item">

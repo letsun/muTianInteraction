@@ -23,7 +23,14 @@ Page({
 
     onShow() {
         let that = this;
-        that.getBatchList(2);
+        let indexa = that.data.indexa;
+
+        if (indexa ==0) {
+            that.getBatchList(2);
+        }else{
+            that.getBatchList(1);
+        }
+
         console.log(app.globalData.corpId)
     },
 
@@ -145,15 +152,20 @@ Page({
         let that = this;
         let batchList = that.data.batchList;
         let batchIdList=[];
+        if (batchList=='') {
+            common.showToast('请先新增批次','none',res=>{})
+        }else {
+            for(let i in batchList) {
+                if(batchList[i].checked) {
+                    batchIdList.push(batchList[i].id)  
+                }
+            } 
+            wx.navigateTo({
+                url: '../addbatch/addbatch?batchIdList=' + batchIdList + '&types=' +0,
+            })
 
-        for(let i in batchList) {
-            if(batchList[i].checked) {
-                batchIdList.push(batchList[i].id)  
-            }
-        } 
-        wx.navigateTo({
-            url: '../addbatch/addbatch?batchIdList=' + batchIdList + '&types=' +0,
-        })
+        }
+
     },
 
 
@@ -188,7 +200,7 @@ Page({
         that.setData({
             batchList: '',
             pageNo:1,
-            indexa:0,
+
         })
     }
 })

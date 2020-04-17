@@ -21,6 +21,7 @@ Page({
         if (res.data.data.corpId!='' && res.data.data.corpId!=undefined) {
           console.log(res.data.data.corpId)
           app.globalData.corpId = res.data.data.corpId;
+          app.globalData.name=res.data.data.name;
           wx.reLaunch({
             url: '../home/home',
           })

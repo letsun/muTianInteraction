@@ -55,7 +55,8 @@ Page({
       mobile:username,
       pwd:password,
     }, (res) => {
-      app.globalData.corpId=res.data.data.corpId
+      app.globalData.corpId=res.data.data.corpId;
+      app.globalData.name=res.data.data.name;
       wx.reLaunch({
         url: '../home/home',
       })

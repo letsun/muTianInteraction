@@ -25,7 +25,7 @@
 				<view class="title-item">生产日期</view>
 			</view>
 			<view class="list">
-				<view class="item" wx:for="{{batchList}}"  bindtap="ischecked" data-index="{{index}}" wx:key="xxx">
+				<view class="item" wx:for="{{batchList}}" bindtap="ischecked" data-index="{{index}}" wx:key="xxx">
 					<view class="item-con">
 						<view class="check-wra">
 							<view class="point-wra">
@@ -44,9 +44,10 @@
 	</view>
 
 	<view class="footer" wx:if="{{indexa==0}}">
-		<view class="upload-btn" bindtap="upbatch">上传产检报告</view>
-		<span class='footer-span'></span>
 		<view class="upload-btn" bindtap="addbatch">新增批次</view>
+		<span class='footer-span'></span>
+
+		<view class="upload-btn" bindtap="upbatch">上传产检</view>
 	</view>
 
 	<view class="footer" wx:if="{{indexa==1}}" style="display:block" bindtap="editbatch">

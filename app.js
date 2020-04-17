@@ -8,5 +8,6 @@ App({
     //  corpId:'59',
     openid:'',
     corpId:'',
+    name:'',
   }
 })

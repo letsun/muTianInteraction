@@ -329,7 +329,7 @@
 						<view class="form-item">
 							<view class="form-key">产检责任人</view>
 							<view class="form-val">
-								<input type="text" class="form-input" bindinput="uploadBy" />
+								<input type="text" class="form-input" bindinput="uploadBy" value="{{uploadBy}}" />
 							</view>
 						</view>
 						<view class="form-item">

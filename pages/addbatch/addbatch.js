@@ -25,10 +25,24 @@ Page({
         indaa: 0,
 
         uploadBy:'',
+        granularity: '',
+        sucroseContent: '',
+        reducingSugar: '',
+        conductanceAsh: '',
+        wet: '',
+        colorValue: '',
+        turbidity: '',
+        insolubleMatter: '',
+        sulfurDioxide: '',
+        weight: '',
+        qualityLevel: '',
+        url: '',
         // produceBatchNo:'',
         // quantity:'',
     },
 
+
+    //types 0上传  1 为新增
     onLoad(options) {
         console.log(options)
         let that = this;
@@ -51,6 +65,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+
+        console.log(app.globalData.name)
         let that = this;
         let date = util.formatTime(new Date());
 
@@ -58,7 +74,9 @@ Page({
         that.setData({
             date: date,
             datea: date,
-            time: time
+            time: time,
+            uploadBy:app.globalData.name,
+         
         })
     },
 
@@ -181,7 +199,7 @@ Page({
         let weight = e.detail.value.weight;
         let wet = e.detail.value.wet;
 
-        if(that.data.types==0) {
+        if (that.data.types == 0) {
             if (granularity == '') {
                 common.showToast('粒度不能为空', 'none', res => { })
                 return false;
@@ -284,7 +302,7 @@ Page({
         let levelList = that.data.levelList;
         let productCheck = {};
 
-        if(levelList!='') {
+        if (levelList != '') {
             productCheck.level = levelList[index].name;
             productCheck.levelId = levelList[index].id;
         }
@@ -303,16 +321,16 @@ Page({
         // var batchIdList = that.data.batchIdList;
         // batchIdList = batchIdList.split(",")
 
-        var  produceBatchNo  = that.data.produceBatchNo;
-        var  quantity  = that.data.quantity;
+        var produceBatchNo = that.data.produceBatchNo;
+        var quantity = that.data.quantity;
 
 
-// debugger
+        // debugger
         if (that.data.types == 1) {
-            if (produceBatchNo==''||produceBatchNo==undefined){
+            if (produceBatchNo == '' || produceBatchNo == undefined) {
                 common.showToast('批次号不能为空', 'none', res => { })
                 return false;
-            }else if(quantity == '' ||quantity==undefined) {
+            } else if (quantity == '' || quantity == undefined) {
                 common.showToast('生产数量不能为空', 'none', res => { })
                 return false;
             }
@@ -324,11 +342,22 @@ Page({
             productBatch.produceTimeStr = that.data.datea + ' ' + that.data.time;	        //生产时间	string	
             productBatch.productId = that.data.getProducts[that.data.ind].id;	                //产品id	number	
             productBatch.quantity = quantity;     //生产数量
-        }else {
+        } else {
             productBatch.id = batchIdList[0];
         }
 
-        if(that.data.uploadBy!='') {
+        if (that.data.granularity != '' || that.data.sucroseContent != '' || that.data.reducingSugar != '' || that.data.conductanceAsh != '' || that.data.wet != '' || that.data.colorValue != '' || that.data.turbidity != '' || that.data.insolubleMatter != '' || that.data.sulfurDioxide != '' || that.data.weight != '' || that.data.qualityLevel != '') {
+
+            if (that.data.uploadBy == '') {
+                common.showToast('厂检责任人不能为空', 'none', res => { })
+                return false;
+            }
+
+            if (that.data.url == '') {
+                common.showToast('质检报告不能为空', 'none', res => { })
+                return false;
+            }
+
             wx.request({
                 url: api.saveBatchCheck,
                 method: "POST",
@@ -344,19 +373,28 @@ Page({
                 },
                 success: (res) => {
                     if (res.data.status == 1) {
+                        let pages = getCurrentPages();
+                        let currPage = pages[pages.length - 1]; //当前页面
+                        let prevPage = pages[pages.length - 2]; //上个页面
+                        prevPage.setData({
+                            indexa: 1
+                        })
+
                         wx.navigateBack({})
+
                     } else {
                         common.showToast(res.data.msg, 'none', res => { })
                     }
-    
+
                 },
             })
-        }else {
+
+        } else {
+            //新增批次(没有质检图)
             wx.request({
                 url: api.saveBatchNotCheck,
                 method: "POST",
                 data: {
-
                     productBatch: productBatch
                 },
                 header: {
@@ -365,11 +403,13 @@ Page({
                 },
                 success: (res) => {
                     if (res.data.status == 1) {
+
+
                         wx.navigateBack({})
                     } else {
                         common.showToast(res.data.msg, 'none', res => { })
                     }
-    
+
                 },
             })
         }
@@ -479,8 +519,8 @@ Page({
         })
     },
 
-
     canvas() {
+
         const that = this;
         const ctx = wx.createCanvasContext('firstCanvas');
         let height = 30;
@@ -831,6 +871,8 @@ Page({
                 }
             })
         });
+
+
     },
 
 
@@ -989,9 +1031,9 @@ Page({
         }, reg => {
             common.showToast(reg.data.msg, 'none', res => {
                 that.setData({
-                    produceBatchNo:''
+                    produceBatchNo: ''
                 })
-             })
+            })
         })
     },
 
