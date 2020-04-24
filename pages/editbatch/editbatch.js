@@ -166,7 +166,7 @@ Page({
                     insolubleMatter: getProduceBatchDetail.produceQualityItems[9].result,
                     sulfurDioxide: getProduceBatchDetail.produceQualityItems[10].result,
                     weight: getProduceBatchDetail.produceQualityItems[11].result,
-                    qualityLevel: getProduceBatchDetail.produceQualityItems[12].result,
+                    // qualityLevel: getProduceBatchDetail.produceQualityItems[12].result,
                     indexx: indexx,
                     indexxx: indexxx,
                 })
@@ -287,7 +287,7 @@ Page({
         let conductanceAsh = e.detail.value.conductanceAsh;
         let granularity = e.detail.value.granularity;
         let insolubleMatter = e.detail.value.insolubleMatter;
-        let qualityLevel = e.detail.value.qualityLevel;
+        // let qualityLevel = e.detail.value.qualityLevel;
         let reducingSugar = e.detail.value.reducingSugar;
         let small = that.data.small[indexxx];
         let sucroseContent = e.detail.value.sucroseContent;
@@ -365,10 +365,10 @@ Page({
             'index': 11,
             'result': weight
         },
-        {
-            'index': 12,
-            'result': qualityLevel
-        },
+        // {
+        //     'index': 12,
+        //     'result': qualityLevel
+        // },
         ];
 
 
@@ -766,7 +766,7 @@ Page({
         let conductanceAsh = that.data.conductanceAsh;
         let granularity = that.data.granularity;
         let insolubleMatter = that.data.insolubleMatter;
-        let qualityLevel = that.data.qualityLevel;
+        // let qualityLevel = that.data.qualityLevel;
         let reducingSugar = that.data.reducingSugar;
         let small = that.data.small[that.data.indexxx];
         let sucroseContent = that.data.sucroseContent;
@@ -857,8 +857,9 @@ Page({
         ctx.setFillStyle('#666');
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(resultleft, top + height * 13, resultWidtg, height)
-
-        let resulttext13 = qualityLevel;
+        let index = that.data.index;
+        let levelList = that.data.levelList;
+        let resulttext13 = levelList[index].name;
 
         ctx.fillText(resulttext13, 275, height * 14 + textTop);
 

@@ -190,7 +190,7 @@ Page({
         let conductanceAsh = e.detail.value.conductanceAsh;
         let granularity = e.detail.value.granularity;
         let insolubleMatter = e.detail.value.insolubleMatter;
-        let qualityLevel = e.detail.value.qualityLevel;
+        // let qualityLevel = e.detail.value.qualityLevel;
         let reducingSugar = e.detail.value.reducingSugar;
         let small = that.data.small[indexxx];
         let sucroseContent = e.detail.value.sucroseContent;
@@ -289,10 +289,10 @@ Page({
             'index': 11,
             'result': weight
         },
-        {
-            'index': 12,
-            'result': qualityLevel
-        },
+        // {
+        //     'index': 12,
+        //     'result': qualityLevel
+        // },
         ];
 
 
@@ -347,7 +347,8 @@ Page({
             productBatch.id = batchIdList[0];
         }
 
-        if (that.data.granularity != '' || that.data.sucroseContent != '' || that.data.reducingSugar != '' || that.data.conductanceAsh != '' || that.data.wet != '' || that.data.colorValue != '' || that.data.turbidity != '' || that.data.insolubleMatter != '' || that.data.sulfurDioxide != '' || that.data.weight != '' || that.data.qualityLevel != ''||that.data.url!= '') {
+        //that.data.qualityLevel != ''||
+        if (that.data.granularity != '' || that.data.sucroseContent != '' || that.data.reducingSugar != '' || that.data.conductanceAsh != '' || that.data.wet != '' || that.data.colorValue != '' || that.data.turbidity != '' || that.data.insolubleMatter != '' || that.data.sulfurDioxide != '' || that.data.weight != '' || that.data.url!= '') {
 
             wx.request({
                 url: api.saveBatchCheck,
@@ -754,7 +755,7 @@ Page({
         let conductanceAsh = that.data.conductanceAsh;
         let granularity = that.data.granularity;
         let insolubleMatter = that.data.insolubleMatter;
-        let qualityLevel = that.data.qualityLevel;
+        // let qualityLevel = that.data.qualityLevel;
         let reducingSugar = that.data.reducingSugar;
         let small = that.data.small[that.data.indexxx];
         let sucroseContent = that.data.sucroseContent;
@@ -846,7 +847,9 @@ Page({
         ctx.setStrokeStyle('#ddd');
         ctx.strokeRect(resultleft, top + height * 13, resultWidtg, height)
 
-        let resulttext13 = qualityLevel;
+        let index = that.data.index;
+        let levelList = that.data.levelList;
+        let resulttext13 = levelList[index].name;
 
         ctx.fillText(resulttext13, 275, height * 14 + textTop);
 
