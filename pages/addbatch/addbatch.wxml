@@ -310,7 +310,7 @@
 							</view>
 						</view>
 
-						<view class="table-footer">
+						<!-- <view class="table-footer">
 							<view class="table-footer-item">
 								白砂糖等级
 							</view>
@@ -320,7 +320,7 @@
 							<view class="table-footer-item">
 								<input name="qualityLevel" type="digit" bindinput="qualityLevel" placeholder="1"></input>
 							</view>
-						</view>
+						</view> -->
 					</view>
 
 					<button class="con-button" bindtap="canvas">生成报告</button>

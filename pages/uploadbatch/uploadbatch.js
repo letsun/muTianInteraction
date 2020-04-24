@@ -86,7 +86,7 @@ Page({
                 for (let i in batchList) {
                     batchList[i].checked = false;
                 }
-
+                
                 batchList[0].checked = true;
                 that.setData({
                     batchList: batchList,

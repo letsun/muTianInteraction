@@ -460,4 +460,9 @@
     overflow: hidden;
     position: fixed;
     bottom: -100rpx;
+    background: #fff;
+}
+
+.canvasa canvas {
+    background: #fff;
 }

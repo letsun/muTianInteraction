@@ -38,7 +38,7 @@ Page({
         qualityLevel: '',
         url: '',
         // produceBatchNo:'',
-        // quantity:'',
+        quantity:'0',
     },
 
 
@@ -199,48 +199,48 @@ Page({
         let weight = e.detail.value.weight;
         let wet = e.detail.value.wet;
 
-        if (that.data.types == 0) {
-            if (granularity == '') {
-                common.showToast('粒度不能为空', 'none', res => { })
-                return false;
-            } else if (sucroseContent == '') {
-                common.showToast('蔗糖分不能为空', 'none', res => { })
-                return false;
-            } else if (reducingSugar == '') {
-                common.showToast('还原糖分不能为空', 'none', res => { })
-                return false;
-            } else if (conductanceAsh == '') {
-                common.showToast('电导灰分不能为空', 'none', res => { })
-                return false;
-            } else if (wet == '') {
-                common.showToast('干燥失重不能为空', 'none', res => { })
-                return false;
-            } else if (colorValue == '') {
-                common.showToast('色值不能为空', 'none', res => { })
-                return false;
-            } else if (turbidity == '') {
-                common.showToast('浑浊度不能为空', 'none', res => { })
-                return false;
-            } else if (insolubleMatter == '') {
-                common.showToast('不溶于水杂质不能为空', 'none', res => { })
-                return false;
-            } else if (sulfurDioxide == '') {
-                common.showToast('二氧化硫不能为空', 'none', res => { })
-                return false;
-            } else if (weight == '') {
-                common.showToast('重量不能为空', 'none', res => { })
-                return false;
-            }
+        // if (that.data.types == 0) {
+        //     if (granularity == '') {
+        //         common.showToast('粒度不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (sucroseContent == '') {
+        //         common.showToast('蔗糖分不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (reducingSugar == '') {
+        //         common.showToast('还原糖分不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (conductanceAsh == '') {
+        //         common.showToast('电导灰分不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (wet == '') {
+        //         common.showToast('干燥失重不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (colorValue == '') {
+        //         common.showToast('色值不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (turbidity == '') {
+        //         common.showToast('浑浊度不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (insolubleMatter == '') {
+        //         common.showToast('不溶于水杂质不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (sulfurDioxide == '') {
+        //         common.showToast('二氧化硫不能为空', 'none', res => { })
+        //         return false;
+        //     } else if (weight == '') {
+        //         common.showToast('重量不能为空', 'none', res => { })
+        //         return false;
+        //     }
 
-            if (that.data.uploadBy == '') {
-                common.showToast('产检负责人不能为空', 'none', res => { })
-                return false;
-            }
-            if (that.data.url == '') {
-                common.showToast('请上传产检报告', 'none', res => { })
-                return false;
-            }
-        }
+        //     if (that.data.uploadBy == '') {
+        //         common.showToast('产检负责人不能为空', 'none', res => { })
+        //         return false;
+        //     }
+        //     if (that.data.url == '') {
+        //         common.showToast('请上传产检报告', 'none', res => { })
+        //         return false;
+        //     }
+        // }
 
 
         let produceQualityItems = [{
@@ -330,10 +330,11 @@ Page({
             if (produceBatchNo == '' || produceBatchNo == undefined) {
                 common.showToast('批次号不能为空', 'none', res => { })
                 return false;
-            } else if (quantity == '' || quantity == undefined) {
-                common.showToast('生产数量不能为空', 'none', res => { })
-                return false;
-            }
+            } 
+            // else if (quantity == '' || quantity == undefined) {
+            //     common.showToast('生产数量不能为空', 'none', res => { })
+            //     return false;
+            // }
 
             productBatch.corporationId = app.globalData.corpId;	        //糖企id	number	
             productBatch.factoryId = that.data.getFactorys[that.data.indaa].id;	                //工厂id	number	
@@ -346,17 +347,7 @@ Page({
             productBatch.id = batchIdList[0];
         }
 
-        if (that.data.granularity != '' || that.data.sucroseContent != '' || that.data.reducingSugar != '' || that.data.conductanceAsh != '' || that.data.wet != '' || that.data.colorValue != '' || that.data.turbidity != '' || that.data.insolubleMatter != '' || that.data.sulfurDioxide != '' || that.data.weight != '' || that.data.qualityLevel != '') {
-
-            if (that.data.uploadBy == '') {
-                common.showToast('厂检责任人不能为空', 'none', res => { })
-                return false;
-            }
-
-            if (that.data.url == '') {
-                common.showToast('质检报告不能为空', 'none', res => { })
-                return false;
-            }
+        if (that.data.granularity != '' || that.data.sucroseContent != '' || that.data.reducingSugar != '' || that.data.conductanceAsh != '' || that.data.wet != '' || that.data.colorValue != '' || that.data.turbidity != '' || that.data.insolubleMatter != '' || that.data.sulfurDioxide != '' || that.data.weight != '' || that.data.qualityLevel != ''||that.data.url!= '') {
 
             wx.request({
                 url: api.saveBatchCheck,
@@ -532,6 +523,11 @@ Page({
         let resultWidtg = 135; //理化结果宽度
 
         let resultleft = 210//理化结果距离左边 
+
+
+        ctx.setFillStyle('#fff');
+        ctx.fillRect(0, 0, 710, 1200)
+
 
         // that.roundRect(ctx, 10, 10, 345, 30, 0, '#F9F9F9', '#F9F9F9')
         ctx.setTextAlign('center');

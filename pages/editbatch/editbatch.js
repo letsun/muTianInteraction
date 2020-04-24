@@ -296,28 +296,28 @@ Page({
         let weight = e.detail.value.weight;
         let wet = e.detail.value.wet;
 
-        if (granularity == '') {
-            common.showToast('粒度不能为空', 'none', res => { })
-        } else if (sucroseContent == '') {
-            common.showToast('蔗糖分不能为空', 'none', res => { })
-        } else if (reducingSugar == '') {
-            common.showToast('还原糖分不能为空', 'none', res => { })
-        } else if (conductanceAsh == '') {
-            common.showToast('电导灰分不能为空', 'none', res => { })
-        } else if (wet == '') {
-            common.showToast('干燥失重不能为空', 'none', res => { })
-        } else if (colorValue == '') {
-            common.showToast('色值不能为空', 'none', res => { })
-            return false;
-        } else if (turbidity == '') {
-            common.showToast('浑浊度不能为空', 'none', res => { })
-        } else if (insolubleMatter == '') {
-            common.showToast('不溶于水杂质不能为空', 'none', res => { })
-        } else if (sulfurDioxide == '') {
-            common.showToast('二氧化硫不能为空', 'none', res => { })
-        } else if (weight == '') {
-            common.showToast('重量不能为空', 'none', res => { })
-        }
+        // if (granularity == '') {
+        //     common.showToast('粒度不能为空', 'none', res => { })
+        // } else if (sucroseContent == '') {
+        //     common.showToast('蔗糖分不能为空', 'none', res => { })
+        // } else if (reducingSugar == '') {
+        //     common.showToast('还原糖分不能为空', 'none', res => { })
+        // } else if (conductanceAsh == '') {
+        //     common.showToast('电导灰分不能为空', 'none', res => { })
+        // } else if (wet == '') {
+        //     common.showToast('干燥失重不能为空', 'none', res => { })
+        // } else if (colorValue == '') {
+        //     common.showToast('色值不能为空', 'none', res => { })
+        //     return false;
+        // } else if (turbidity == '') {
+        //     common.showToast('浑浊度不能为空', 'none', res => { })
+        // } else if (insolubleMatter == '') {
+        //     common.showToast('不溶于水杂质不能为空', 'none', res => { })
+        // } else if (sulfurDioxide == '') {
+        //     common.showToast('二氧化硫不能为空', 'none', res => { })
+        // } else if (weight == '') {
+        //     common.showToast('重量不能为空', 'none', res => { })
+        // }
 
         let produceQualityItems = [{
             'index': 0,
@@ -539,6 +539,8 @@ Page({
     
         let resultleft = 210//理化结果距离左边 
     
+        ctx.setFillStyle('#fff');
+        ctx.fillRect(0, 0, 710, 1200)
         // that.roundRect(ctx, 10, 10, 345, 30, 0, '#F9F9F9', '#F9F9F9')
         ctx.setTextAlign('center');
         ctx.setFillStyle('#F9F9F9');
