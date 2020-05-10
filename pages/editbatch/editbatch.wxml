@@ -326,7 +326,7 @@
 
 					<view class="form">
 						<view class="form-item">
-							<view class="form-key">产检责任人</view>
+							<view class="form-key">厂检责任人</view>
 							<view class="form-val">
 								<input type="text" class="form-input" value="{{getProduceBatchDetail.productCheck.uploadBy}}" bindinput="uploadBy" />
 							</view>
@@ -344,7 +344,7 @@
 							</view>
 						</view>
 						<view class="form-item">
-							<view class="form-key">产检等级</view>
+							<view class="form-key">厂检等级</view>
 							<view class="form-val">
 								<select class="form-input select-text">
 									<picker bindchange="levelList" value="{{index}}" range="{{levelList}}" range-key="name">{{levelList[index].name}}</picker>
@@ -353,7 +353,7 @@
 							</view>
 						</view>
 						<view class="form-item">
-							<view class="form-key">产检报告</view>
+							<view class="form-key">厂检报告</view>
 							<view class="form-val">
 								<view class="img-item" wx:if="{{url==''}}" bindtap="upload">
 									<image class="uplodimg" src="../images/1_6.png"></image>
