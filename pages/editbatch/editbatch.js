@@ -1,6 +1,6 @@
 // pages/editbatch/editbatch.js
 // pages/addbatch/addbatch.js
-const util = require("../../utils/util")
+const utils = require("../../utils/util")
 const app = getApp()
 const api = require("../../utils/api.js")
 const common = require("../../utils/common.js")
@@ -26,7 +26,7 @@ Page({
     },
 
     onLoad(options) {
-        console.log(options)
+        console.log(utils.formatTime(new Date()))
 
         let that = this;
         let batchIdList = options.batchIdList;
@@ -113,30 +113,48 @@ Page({
             // debugger;
             //等级
             for (let i in levelList) {
-                if (levelList[i].id == getProduceBatchDetail.productCheck.levelId) {
-                    var index = i;
-                    break;
+                if (getProduceBatchDetail.productCheck!=undefined) {
+                    if (levelList[i].id == getProduceBatchDetail.productCheck.levelId) {
+                        var index = i;
+                        break;
+                    }else {
+                        var index = 0;
+                    }
                 }else {
                     var index = 0;
                 }
+
+
             }
 
             let produceTimeStr = getProduceBatchDetail.produceBatch.produceTimeStr;
             var str = produceTimeStr.split(' ');
 
+
+            if (getProduceBatchDetail.productCheck!=undefined) {
+                that.setData({
+                    uploadBy: getProduceBatchDetail.productCheck.uploadBy,
+                    url: getProduceBatchDetail.productCheck.url,
+                    date: getProduceBatchDetail.productCheck.uploadTime,
+                })
+            }else {
+                that.setData({
+                     date:utils.formatTime(new Date())
+                    // date:
+                })
+            }
             that.setData({
                 getProduceBatchDetail: getProduceBatchDetail,
                 produceBatchNo: getProduceBatchDetail.produceBatch.batchNo,
                 quantity: getProduceBatchDetail.produceBatch.quantity,
-                uploadBy: getProduceBatchDetail.productCheck.uploadBy,
+
                 index: index,
 
                 ind: ind,
                 inda: inda,
                 indaa: indaa,
 
-                url: getProduceBatchDetail.productCheck.url,
-                date: getProduceBatchDetail.productCheck.uploadTime,
+
                 datea: str[0],
                 time: str[1],
             })
