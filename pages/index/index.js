@@ -26,13 +26,13 @@ Page({
             url: '../home/home',
           })
         }else {
+
+          app.globalData.corpId = '0';
+
           wx.reLaunch({
-            url: '../login/login',
+            url: '../home/home',
           })
-
          }
-
-
       } else {
         wx.hideLoading()
       }

@@ -16,9 +16,18 @@ Page({
    * 
    */
   uploadbatch() {
-    wx.navigateTo({
-      url: '../uploadbatch/uploadbatch',
-    })
+    // debugger
+    if (app.globalData.corpId == 0) {
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    }else {
+      wx.navigateTo({
+        url: '../uploadbatch/uploadbatch',
+      })
+    }
+
+
   },
 
 

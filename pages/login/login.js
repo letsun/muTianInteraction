@@ -2,7 +2,7 @@
 const app = getApp()
 const api = require('../../utils/api.js')
 const common = require('../../utils/common.js')
-
+ // "navigationStyle": "custom"
 Page({
 
   /**

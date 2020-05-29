@@ -4,8 +4,11 @@ var dev = 'http://192.168.1.11:8080/mtkj-mobile';//本地
 var dev1= 'http://192.168.1.11:8080/mtkj-manage';//本地
 var test = 'https://mut.lxcyhd.com';//测试
 var test1 = 'https://mut.lxcyhd.com/manage';//测试
-var ip = test;
-var ip1 = test1;
+
+var pro = 'https://sqt.pd-kj.com/';//测试
+var pro1 = 'https://sqt.pd-kj.com/manage';//测试
+var ip = pro;
+var ip1 = pro1;
 
 var api = {
   getProduceCheckOpenid: ip + '/wechat/getProduceCheckOpenid', //获取openId
