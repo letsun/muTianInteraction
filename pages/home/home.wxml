@@ -3,7 +3,7 @@
 <view id="container" class="container">
     <image class="bg" src="../images/1_5.png"></image>
     <view class="content">
-        <view class="login-out" bindtap="loginout">退出登录</view>
+        <view class="login-out" bindtap="loginout" wx:if="{{corpId !=0}}">退出登录</view>
         <image class="header" src="../images/1_4.png" alt=""></image>
 
         <view class="nav-list">

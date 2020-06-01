@@ -9,7 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    
+  },
+  onShow() {
 
+    var corpId =  app.globalData.corpId;
+    this.setData({
+      corpId:corpId
+    })
   },
   /**
    * 上传产检报告

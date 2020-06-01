@@ -1,10 +1,9 @@
-
-
 .container .bg {
-    height: 100%;
-    width: 100%;
-    position: absolute;
+
+  width: 100%;
+  position: absolute;
 }
+
 .container .content {
   position: relative;
   width: 100%;
@@ -14,10 +13,16 @@
   background-size: 100% 100%;
   box-sizing: border-box;
 }
+
 .container .content .header {
   display: block;
   margin: 0 auto;
+  height: 737rpx;
+  width: 595rpx;
 }
+
+
+
 .container .content .login-out {
   position: absolute;
   top: 30rpx;
@@ -32,6 +37,7 @@
   background: #fff;
   border-radius: 40rpx;
 }
+
 .container .content .nav-list {
   position: absolute;
   left: 0;
@@ -40,15 +46,18 @@
   display: flex;
   width: 100%;
 }
+
 .container .content .nav-list .nav-item {
   flex: 1;
 }
+
 .container .content .nav-list .nav-item .nav-icon {
   display: block;
   margin: 0 auto;
   max-height: 136rpx;
   max-width: 136rpx;
 }
+
 .container .content .nav-list .nav-item .nav-text {
   margin-top: 16rpx;
   font-size: 24rpx;
